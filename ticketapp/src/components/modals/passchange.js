@@ -7,11 +7,16 @@ const Passchange = ()=>{
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [newpass,setnewpass] = useState('');
+    const [confirm, setconfirm] = useState('');
 
     const passchange = ()=>{
-        axios.post("http://localhost:3001/api/passchange",{
-            newpass: newpass
-        }).then(()=>{alert("Password Change successfull!")})
+        if(newpass === confirm){
+            axios.post("http://localhost:3001/api/passchange",{
+                newpass: newpass
+            }).then(()=>{alert("Password Change successfull!");window.location.reload();})
+        }else{
+            alert("Please confirm your password");
+        }
     }
     return(
         <>
@@ -26,7 +31,11 @@ const Passchange = ()=>{
                 <Form>
                     <Form.Group className="mb-3">
                         <Form.Label>New Password</Form.Label>
-                        <Form.Control onChange={(e) =>{setnewpass(e.target.value)}} maxlength="30"/>
+                        <Form.Control type='password' onChange={(e) =>{setnewpass(e.target.value)}} maxlength="30"/>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Control type='password' onChange={(e) =>{setconfirm(e.target.value)}} maxlength="30"/>
                     </Form.Group>
                 </Form>
             </Modal.Body>
@@ -34,8 +43,7 @@ const Passchange = ()=>{
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={()=>{
-                    handleClose();
+                <Button variant="primary" onClick={()=>{                    
                     passchange();
                 }}>
                     Save
