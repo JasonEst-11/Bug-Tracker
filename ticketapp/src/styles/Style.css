@@ -1,0 +1,141 @@
+.square-box{
+    width: 600px;
+    height: 300px;
+  }
+  .logo{
+    height: 300px;
+  }
+  
+  .outline-login{
+    color: white;
+    border-radius: 25px;
+    border: 2px solid #333;
+    padding: 20px;
+    width: 400px;
+    height: 350px;
+    background-color: #464886;
+  }
+  
+  .outline-register{
+    color: white;
+    border-radius: 25px;
+    border: 2px solid #333;
+    padding: 20px;
+    width: 500px;
+    height: 420px;
+    background-color: #464886;
+  }
+  
+  .panel{
+    width: 89%;
+    position: absolute;
+    overflow: auto;
+    right: 0;
+  }
+  @media screen and (max-width: 756px) {
+    .panel {
+        width: 90%;
+        position: relative;
+        overflow: auto;
+    }
+  }
+  body{
+    background: url('../images/bg.png') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  
+  .sidebar {
+    margin: 0;
+    padding: 0;
+    width: 11%;
+    background-color: #25274D;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    font-size: 18px;
+    color: white;
+  }
+  
+  .sidebar a {
+    display: block;
+    color: rgb(255, 255, 255);
+    padding: 16px;
+    text-decoration: none;
+  }
+  
+  
+  .sidebar a:hover:not(.active) {
+    background-color: #757575;
+    color: white;
+  }
+  
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+  }
+  
+  @media screen and (max-width: 756px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+  }
+  
+  @media screen and (max-width: 756px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+  
+  }
+  .paginationBttns {
+    width: 80%;
+    height: 30px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    }
+    
+  .paginationBttns a {
+    padding: 10px;
+    margin: 8px;
+    cursor: pointer;
+  }
+  
+  .paginationBttns a:hover {
+    color:rgb(255, 255, 255);
+    background-color: #5a5a5a;
+  }
+  
+  .paginationActive a {
+    background-color: #8a8a8a;
+  }
+  
+  .paginationDisabled a {
+    background-color: grey;
+  }
+  
+  .pag{
+    position: absolute;
+    bottom: 0;
+  }
+  
+  .memberbacklog{
+    height: 55vh;
+    position: relative;
+  }
+  
+  .board{
+    height: 80vh;
+    overflow: auto;
+  }
+  .projectticket{
+    height: 50vh;
+  }
