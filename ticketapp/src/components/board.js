@@ -24,12 +24,6 @@ const Board = ({status,data}) =>{
         backgroundColor = 'grey'
     }
 
-    const showTickets = data.map((val)=>{
-        return(            
-            <Ticket data={val} key={val.t_id}/>                       
-        )
-    }) 
-
     return(     
         <div className="col border rounded-3 border-1 border-secondary mx-5 my-4 p-1 bg-white" ref={drop}>
             <div className='container-fluid'>
@@ -37,7 +31,11 @@ const Board = ({status,data}) =>{
             </div>           
             <div className='board' style={{backgroundColor}}>
                 <div className='row justify-content-center pt-3 m-1'>
-                    {showTickets}
+                    {data.map((val)=>{
+                        return(
+                            <Ticket data={val} key={val.t_id}/>
+                        )
+                    })}
                 </div>
             </div>            
         </div>      

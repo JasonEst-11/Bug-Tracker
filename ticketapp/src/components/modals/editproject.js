@@ -26,22 +26,9 @@ const EditProject = ({project_id,permission,curname,curdesc}) =>{
         window.location.reload();
     }
 
-    //Button permission
-    const btnpermission = (permission) =>{
-        if(permission === 'Admin'){
-            return(
-                <Button variant='secondary'className='m-2 p-2' onClick={handleShow}>Edit Project <BiCog/></Button>
-            )
-        }else{
-            return(
-                <Button variant='secondary'className='m-2 p-2' disabled>Edit Project <BiCog/></Button>
-            )
-        }
-    }
-
     return(
         <>
-            {btnpermission(permission)}
+            {permission === 'Admin'&& <Button variant='secondary'className='m-2 p-2' onClick={handleShow}>Edit Project <BiCog/></Button>}
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Project</Modal.Title>

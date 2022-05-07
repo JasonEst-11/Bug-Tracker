@@ -23,9 +23,12 @@ const Members = ({project_id,permission}) =>{
         axios.post('http://localhost:3001/api/delmember',{
             memid: id,
             Pid: project_id
-        }).then(()=>{},()=>{})
-
-        window.location.reload();
+        }).then(()=>{
+            axios.post('http://localhost:3001/api/delmembertickets',{
+                memid: id,
+                Pid: project_id
+            }).then(()=>{alert("Removed "+id+" from project");window.location.reload();})
+        },()=>{alert("Somethin went wrong.")})
     }
 
     //Change Role
@@ -45,49 +48,12 @@ const Members = ({project_id,permission}) =>{
 
         window.location.reload();
     }
-    
-    //Dropdown permision
-    const droppermission = (id,role)=>{
-        if(permission === "Admin"){
-            return(
-                <>
-                    <Dropdown.Item onClick={()=>{deleteMember(id)}}>Remove Member</Dropdown.Item>
-                    <Dropdown.Item onClick={()=>{changeRole(id,role)}}>Change Role</Dropdown.Item>
-                </>
-            )
-        }else{
-            return(
-                <>
-                    <Dropdown.Item onClick={()=>{deleteMember(id)}} disabled>Remove Member</Dropdown.Item>
-                    <Dropdown.Item onClick={()=>{changeRole(id,role)}} disabled>Change Role</Dropdown.Item>
-                </>
-            )
-        }
-    }
-    
+      
     //pagination
     const [pageNumber, setPageNumber] = useState(0);
     const rowperpage = 5;
     const pagesvisited = pageNumber * rowperpage;
-    
-    const displayMembers = p_members.slice(pagesvisited, pagesvisited+rowperpage).map((val)=>{
-        return(
-            <tr key={val.email}>
-                <td>{val.fullname}</td>
-                <td>{val.email}</td>
-                <td>{val.role}</td>
-                <td>
-                <Dropdown>
-                        <Dropdown.Toggle variant='secondary'> 
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                        {droppermission(val.user_id,val.role)}
-                    </Dropdown.Menu>
-                </Dropdown>
-                </td>
-            </tr>
-        )
-    })
+     
 
     const pagecount = Math.ceil(p_members.length / rowperpage);
     const changePage = ({selected}) =>{
@@ -106,7 +72,27 @@ const Members = ({project_id,permission}) =>{
                     </tr>
                 </thead>
                 <tbody>
-                    {displayMembers}
+                    {p_members.slice(pagesvisited, pagesvisited+rowperpage).map((val)=>{
+                        return(
+                            <tr key={val.email}>
+                                <td>{val.fullname}</td>
+                                <td>{val.email}</td>
+                                <td>{val.role}</td>
+                                <td>
+                                {permission === 'Admin'&&
+                                <Dropdown>
+                                    <Dropdown.Toggle variant='secondary' className='rounded-circle'> 
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                            <Dropdown.Item onClick={()=>{deleteMember(val.email)}}>Remove Member</Dropdown.Item>
+                                            <Dropdown.Item onClick={()=>{changeRole(val.email,val.role)}}>Change Role</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>}
+                                </td>
+                            </tr>
+                            )
+                        })
+                    }
                 </tbody>
             </Table>
             </div>            

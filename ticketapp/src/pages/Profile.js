@@ -37,7 +37,7 @@ const Profile = () =>{
                     <div className="container rounded bg-white mt-5 mb-5">
                         <div className="row">
                             <div className="col-md-3 border-right">
-                                <div className="d-flex flex-column align-items-center text-center p-3 py-5"><img className="rounded-circle mt-5 border border-2 border-dark" width="150px" alt='usericon' src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"/><span className="font-weight-bold">UID:</span></div>
+                                <div className="d-flex flex-column align-items-center text-center p-3 py-5"><img className="rounded-circle mt-5 border border-2 border-dark" width="150px" alt='usericon' src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"/></div>
                             </div>
                             <div className="col-md-5 border-right">
                                 <div className="p-3 py-5">

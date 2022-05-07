@@ -1,18 +1,18 @@
 import {React,useState,useEffect} from 'react';
+import axios from 'axios';
 import Members from '../components/members';
 import Sidebar from '../components/sidebar';
-import {useParams} from 'react-router-dom';
 import Backlog from '../components/backlog';
+import Chart from '../components/chart';
+import Board from '../components/board';
 import AddTicket from '../components/modals/addticket';
 import AddMember from '../components/modals/addmember';
-import Board from '../components/board';
-import axios from 'axios';
-import {DndProvider} from 'react-dnd';
-import {HTML5Backend} from "react-dnd-html5-backend";
-import Chart from '../components/chart';
-import {Button} from 'react-bootstrap';
 import EditProject from '../components/modals/editproject';
 import DeleteProject from '../components/modals/deleteproject';
+import {useParams} from 'react-router-dom';
+import {DndProvider} from 'react-dnd';
+import {HTML5Backend} from "react-dnd-html5-backend";
+import {Button} from 'react-bootstrap';
 
 const Project = () =>{
     let {projectid} = useParams('projectid');
@@ -100,12 +100,7 @@ const Project = () =>{
                             <h5>Back Log</h5>
                             <div className='ms-auto'>                   
                                 <AddTicket project_id={projectid}/>
-                                {
-                                    role === "Admin"? 
-                                     <Button variant='warning' className='mx-2' onClick={resolve}>Resolve Done</Button>
-                                     : 
-                                     <Button variant='warning' className='mx-2' disabled>Resolve Done</Button>
-                                }
+                                {role === "Admin" && <Button variant='warning' className='mx-2' onClick={resolve}>Resolve Done</Button>}
                             </div>  
                         </div>                  
                         <Backlog project_id={projectid}/>

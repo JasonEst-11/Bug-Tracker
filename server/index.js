@@ -285,6 +285,19 @@ app.post('/api/delmember',(req,res)=>{
         }
     })
 })
+//Unlist assigned tickets from deleted member
+app.post('/api/delmembertickets',(req,res)=>{
+    const memid = req.body.memid;
+    const pid= req.body.Pid;
+    let sql = "update tickets set handled_by = null where handled_by = ? and t_proj_id = ?";
+    db.query(sql,[memid,pid],(err,result)=>{
+        if(err){
+            console.log(err);
+        }else{
+            res.send(result);
+        }
+    })
+})
 
 //Change Role
 app.post('/api/changeRole',(req,res)=>{

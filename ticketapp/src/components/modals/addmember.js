@@ -17,25 +17,9 @@ const AddMember = ({project_id,permission}) =>{
         window.location.reload();
     }
 
-    //Button permission
-    const btnpermission = (permission) =>{
-        if(permission === 'Admin'){
-            return(
-                <Button onClick={handleShow}>
-                    Add Member
-                </Button>
-            )
-        }else{
-            return(
-                <Button variant="primary" onClick={handleShow} disabled>
-                    Add Member
-                </Button>
-            )
-        }
-    }
     return(
         <>
-            {btnpermission(permission)}
+            {permission === 'Admin'&& <Button onClick={handleShow}>Add Member</Button>}
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add Member</Modal.Title>

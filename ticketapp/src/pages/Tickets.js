@@ -42,7 +42,7 @@ const Tickets  = () =>{
     //Priority
     var low=0,med=0,high=0,vhigh=0;
      
-    tickets.map((val)=>{
+    tickets.forEach(val=>{
         tsum++;
         if(val.t_type === 'Task'){
             task++;
@@ -74,7 +74,7 @@ const Tickets  = () =>{
             vhigh++;
         }
     })
-
+    
     return ( 
         <div>
             <Sidebar/>

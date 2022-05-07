@@ -10,17 +10,6 @@ const DeleteProject = ({project_id,permission}) =>{
     const handleShow = () => setShow(true);
     const nav = useNavigate();
 
-    const btnpermission = (permission) =>{
-        if(permission === 'Admin'){
-            return(
-                <Button variant='danger' className='m-2 p-2' onClick={handleShow}>Delete Project <BiTrash/></Button>
-            )
-        }else{
-            return(
-                <Button variant='danger' className='m-2 p-2' disabled>Delete Project <BiTrash/></Button>
-            )
-        }
-    }
     //delete funciton
     const deleteproject =()=>{
         axios.post("http://localhost:3001/api/deletetickets",{
@@ -37,8 +26,7 @@ const DeleteProject = ({project_id,permission}) =>{
     }
     return(
         <>
-            {btnpermission(permission)}
-
+            {permission === 'Admin'&&<Button variant='danger' className='m-2 p-2' onClick={handleShow}>Delete Project <BiTrash/></Button>}
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                 <Modal.Title>Delete Project</Modal.Title>
