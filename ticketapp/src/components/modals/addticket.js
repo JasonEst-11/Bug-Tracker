@@ -2,7 +2,7 @@ import {React,useState,useEffect} from 'react';
 import {Modal,Button,Form } from 'react-bootstrap';
 import axios from 'axios';
 
-const AddTicket = ({project_id}) =>{
+const AddTicket = (props) =>{
 
     //Modal control
     const [show, setShow] = useState(false);
@@ -22,7 +22,7 @@ const AddTicket = ({project_id}) =>{
     useEffect(()=>{
         axios.get("http://localhost:3001/api/projectmembers",{
             params:{
-                Pid: project_id
+                Pid: props.project_id
             }
         }).then((response)=>{
             setMembers(response.data);
@@ -38,10 +38,10 @@ const AddTicket = ({project_id}) =>{
             priority: priority,
             status: status,
             date: date,
-            Pid: project_id
-        }).then(()=>{},()=>{alert('something went wrong please try again')});
-
-        window.location.reload();
+            Pid: props.project_id
+        }).then(()=>{window.location.reload();},()=>{
+            alert('something went wrong please try again');
+        });
     }
     return(
         <>
@@ -56,9 +56,9 @@ const AddTicket = ({project_id}) =>{
                 <Modal.Body>
                     <Form>
                         <Form.Label>Title</Form.Label>
-                        <Form.Control onChange={(e)=>{setTitle(e.target.value)}} maxlength="50"/>
+                        <Form.Control onChange={(e)=>{setTitle(e.target.value)}} maxLength="50"/>
                         <Form.Label>Description</Form.Label>
-                        <Form.Control as="textarea" rows={5} onChange={(e)=>{setDesc(e.target.value)}} maxlength="255"/>
+                        <Form.Control as="textarea" rows={5} onChange={(e)=>{setDesc(e.target.value)}} maxLength="255"/>
                         <div className='row'>
                             <div className='col'>
                                 <Form.Label>Assign to member</Form.Label>

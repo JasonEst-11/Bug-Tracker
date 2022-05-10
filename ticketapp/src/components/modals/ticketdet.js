@@ -27,7 +27,7 @@ const Ticketdet = ({data})=> {
 
     return(
         <>
-            <Dropdown.Item onClick={handleShow}>Details</Dropdown.Item>
+            <a className='row' onClick={handleShow}>Details</a>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Ticket Details</Modal.Title>

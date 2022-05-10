@@ -1,8 +1,9 @@
-import { Table, Dropdown} from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import axios from "axios";
 import { React, useState,useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import {IoArrowBackCircle,IoArrowForwardCircle} from 'react-icons/io5';
+import {IoArrowBackSharp,IoArrowForwardSharp} from 'react-icons/io5';
+import AddMember from './modals/addmember';
 
 const Members = ({project_id,permission}) =>{
 
@@ -61,7 +62,13 @@ const Members = ({project_id,permission}) =>{
     }
 
     return(
-        <div>
+        <>
+            <div className='d-flex mb-3'>
+                <h5>Contributors</h5> 
+                <div className='ms-auto'>
+                    <AddMember project_id={project_id} permission={permission} p_members={p_members} setMembers={setMembers}/>
+                </div>         
+            </div>  
             <div>
                 <Table>
                 <thead>
@@ -80,14 +87,14 @@ const Members = ({project_id,permission}) =>{
                                 <td>{val.role}</td>
                                 <td>
                                 {permission === 'Admin'&&
-                                <Dropdown>
-                                    <Dropdown.Toggle variant='secondary' className='rounded-circle'> 
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu>
-                                            <Dropdown.Item onClick={()=>{deleteMember(val.email)}}>Remove Member</Dropdown.Item>
-                                            <Dropdown.Item onClick={()=>{changeRole(val.email,val.role)}}>Change Role</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>}
+                                <div className="dropdown-container" tabIndex="-1">
+                                    <div className="three-dots"></div>
+                                    <div className="dropdown px-4 m-1 text-center">
+                                        <a className='row' onClick={()=>{deleteMember(val.email)}}>Remove Member</a>
+                                        <a className='row' onClick={()=>{changeRole(val.email,val.role)}}>Change Role</a>
+                                    </div>
+                                </div>
+                                }
                                 </td>
                             </tr>
                             )
@@ -98,8 +105,8 @@ const Members = ({project_id,permission}) =>{
             </div>            
             <div className='pag'>
                 <ReactPaginate
-                previousLabel={<IoArrowBackCircle/>}
-                nextLabel={<IoArrowForwardCircle/>}
+                previousLabel={<IoArrowBackSharp/>}
+                nextLabel={<IoArrowForwardSharp/>}
                 pageCount={pagecount}
                 onPageChange={changePage}
                 containerClassName={"paginationBttns"}
@@ -107,7 +114,7 @@ const Members = ({project_id,permission}) =>{
                 activeClassName={"paginationActive"}
                 />  
             </div>                    
-        </div>
+        </>
     )
 }
 

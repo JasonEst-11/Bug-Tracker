@@ -3,7 +3,7 @@ import {BiAddToQueue} from 'react-icons/bi';
 import {Button,Modal,Form} from 'react-bootstrap';
 import axios from 'axios';
 
-const AddProject = () =>{
+const AddProject = (props) =>{
     //Modal control
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -17,9 +17,7 @@ const AddProject = () =>{
             Name: p_name,
             Desc: p_desc
         }).then((response)=>{
-            axios.post("http://localhost:3001/api/roletoproj",{insertid: response.data.insertId}).then(()=>{
-                window.location.reload();
-            })
+            axios.post("http://localhost:3001/api/roletoproj",{insertid: response.data.insertId}).then(()=>{window.location.reload();})
         },
         ()=>{
             alert('something went wrong please try again')
@@ -38,11 +36,11 @@ const AddProject = () =>{
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Label>Project Name</Form.Label>
-                            <Form.Control type="pname" onChange={(e) =>{setp_name(e.target.value)}} maxlength="20"/>
+                            <Form.Control type="pname" onChange={(e) =>{setp_name(e.target.value)}} maxLength="20"/>
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control as="textarea" rows={5} onChange={(e) =>{setp_desc(e.target.value)}} maxlength="255"/>
+                            <Form.Control as="textarea" rows={5} onChange={(e) =>{setp_desc(e.target.value)}} maxLength="255"/>
                         </Form.Group>
                     </Form>
                 </Modal.Body>

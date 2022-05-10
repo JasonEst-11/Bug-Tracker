@@ -5,51 +5,22 @@ import Sidebar from '../components/sidebar';
 import Backlog from '../components/backlog';
 import Chart from '../components/chart';
 import Board from '../components/board';
-import AddTicket from '../components/modals/addticket';
-import AddMember from '../components/modals/addmember';
 import EditProject from '../components/modals/editproject';
 import DeleteProject from '../components/modals/deleteproject';
 import {useParams} from 'react-router-dom';
 import {DndProvider} from 'react-dnd';
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {Button} from 'react-bootstrap';
+import {BiCheckCircle} from 'react-icons/bi';
 
 const Project = () =>{
     let {projectid} = useParams('projectid');
-    const [todo, setTodo] = useState([]);
-    const [inprog, setInprog] = useState([]);
-    const [done, setDone] = useState([]);
     const [role, setrole] = useState('');
     const [projname, setprojname] = useState('');
     const [desc, setdesc] = useState('');
    
 
     useEffect(()=>{   
-        //fetch tickets
-        axios.get("http://localhost:3001/api/tickets",{
-            params:{
-                Pid: projectid,
-                state: "To Do"
-            }
-        }).then((response)=>{
-            setTodo(response.data); 
-        })
-        axios.get("http://localhost:3001/api/tickets",{
-            params:{
-                Pid: projectid,
-                state: "In Progress"
-            }
-        }).then((response)=>{
-            setInprog(response.data); 
-        })
-        axios.get("http://localhost:3001/api/tickets",{
-            params:{
-                Pid: projectid,
-                state: "Done"
-            }
-        }).then((response)=>{
-            setDone(response.data); 
-        })
         //Get project details and user role
         axios.get("http://localhost:3001/api/role",{
             params:{
@@ -61,12 +32,13 @@ const Project = () =>{
             setdesc(response.data[0].proj_desc)
         })
     },[]);
-
+    
     //Resolve tickets
     const resolve =()=>{
-        alert("")
+        axios.post("http://localhost:3001/api/resolve",{
+            Pid: projectid
+        }).then(()=>window.location.reload())
     }
-    
     return ( 
         <div>
             <Sidebar/>
@@ -78,31 +50,18 @@ const Project = () =>{
                 {/* Kanban board */}
                 <div className="row">
                     <DndProvider backend={HTML5Backend}>
-                            <Board status={"To Do"}  data={todo}/>
-                            <Board status={"In Progress"} data={inprog}/>
-                            <Board status={"Done"} data={done}/>               
+                            <Board status={"To Do"} projectid={projectid}/>
+                            <Board status={"In Progress"} projectid={projectid}/>
+                            <Board status={"Done"} projectid={projectid}/>     
                     </DndProvider>     
                 </div>
                 <div className='row'>
                     {/* Team members */}
-                    <div className='col border rounded-3 border-1 border-secondary m-3 p-4 bg-white memberbacklog'>
-                        <div className='d-flex mb-3'>
-                            <h5>Contributors</h5> 
-                            <div className='ms-auto'>
-                                <AddMember project_id={projectid} permission={role}/>
-                            </div>         
-                        </div>                                              
+                    <div className='col border rounded-3 border-1 border-secondary m-3 p-4 bg-white memberbacklog'>                                          
                         <Members project_id={projectid} permission={role}/>
                     </div>
                     {/* Backlog items */}
                     <div className='col border rounded-3 border-1 border-secondary m-3 p-4 bg-white memberbacklog'>
-                        <div className='d-flex mb-3'>
-                            <h5>Back Log</h5>
-                            <div className='ms-auto'>                   
-                                <AddTicket project_id={projectid}/>
-                                {role === "Admin" && <Button variant='warning' className='mx-2' onClick={resolve}>Resolve Done</Button>}
-                            </div>  
-                        </div>                  
                         <Backlog project_id={projectid}/>
                     </div>
                 </div> 
@@ -111,7 +70,8 @@ const Project = () =>{
                     <Chart projectid={projectid}/>
                 </div>
                 <div className='m-2 p-2'>
-                    <EditProject project_id={projectid} permission={role} curname={projname} curdesc={desc}/>
+                    <EditProject project_id={projectid} permission={role} curname={projname} curdesc={desc} setprojname={setprojname} setdesc={setdesc}/>
+                    {role === "Admin" && <Button variant='success' className='m-2 p-2' onClick={resolve}>Clear Done Tickets <BiCheckCircle  /></Button>}
                     <DeleteProject project_id={projectid} permission={role}/>
                 </div>    
             </div>

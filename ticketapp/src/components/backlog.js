@@ -1,9 +1,10 @@
-import React, { useState,useEffect} from 'react';
+import React, {useState,useEffect} from 'react';
 import axios from 'axios';
-import { Table, Dropdown} from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import Ticketdet from './modals/ticketdet';
-import {IoArrowBackCircle,IoArrowForwardCircle} from 'react-icons/io5';
+import {IoArrowBackSharp,IoArrowForwardSharp} from 'react-icons/io5';
+import AddTicket from './modals/addticket';
 
 const Backlog = ({project_id})=>{
     //fetch backlog 
@@ -44,7 +45,14 @@ const Backlog = ({project_id})=>{
     }
 
     return(
-        <div>
+        <>
+            <div className='d-flex mb-3'>
+                <h5>Back Log</h5>
+                <div className='ms-auto'>                   
+                    <AddTicket project_id={project_id} backlog={backlog} setItems={setItems}/>
+                </div>  
+            </div>
+            <div>
             <Table>
                 <thead>
                     <tr>
@@ -63,16 +71,14 @@ const Backlog = ({project_id})=>{
                                 <td>{val.t_type}</td>
                                 <td>{val.handled_by}</td>
                                 <td>
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant='secondary' className='rounded-circle'> 
-                                        </Dropdown.Toggle>
-
-                                        <Dropdown.Menu>
+                                    <div className="dropdown-container" tabIndex="-1">
+                                        <div className="three-dots"></div>
+                                        <div className="dropdown px-4 m-1 text-center">
                                             <Ticketdet data={val}/>
-                                            <Dropdown.Item onClick={()=>{deleteticket(val.t_id)}}>Delete</Dropdown.Item>
-                                            <Dropdown.Item onClick={()=>{addtoboard(val.t_id)}}>To Do</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
+                                            <a className='row' onClick={()=>{deleteticket(val.t_id)}}>Delete</a>
+                                            <a className='row' onClick={()=>{addtoboard(val.t_id)}}>To Do</a>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             )
@@ -82,8 +88,8 @@ const Backlog = ({project_id})=>{
             </Table>
             <div className='pag'>
                 <ReactPaginate
-                previousLabel={<IoArrowBackCircle/>}
-                nextLabel={<IoArrowForwardCircle/>}
+                previousLabel={<IoArrowBackSharp/>}
+                nextLabel={<IoArrowForwardSharp/>}
                 pageCount={pagecount}
                 onPageChange={changePage}
                 containerClassName={"paginationBttns"}
@@ -92,6 +98,7 @@ const Backlog = ({project_id})=>{
                 />
             </div>            
         </div>
+    </>
     )
 }
 

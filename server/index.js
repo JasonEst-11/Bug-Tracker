@@ -185,6 +185,7 @@ app.post('/api/newproject',(req,res)=>{
         }
     })   
 });
+
 //After new project
 app.post('/api/roletoproj',(req,res)=>{
     const insertid = req.body.insertid;
@@ -268,7 +269,7 @@ app.post('/api/addmember',(req,res)=>{
     const pid = req.body.Pid;
     let sql = "insert into project_members(project_id,user_id,role)values(?,?,'Developer')";
     db.query(sql,[pid,uid],(err,result)=>{
-        if(err) console.log(err);
+        if(err) {console.log(err)}
     })
 })
 
@@ -407,6 +408,18 @@ app.post('/api/updatestatus',(req,res)=>{
     const target = req.body.target;
     sql = "Update tickets set t_status = ?, handled_by = ? where t_id = ?";
     db.query(sql,[target,current_user,ticket_id],(err,result)=>{
+        if(err){
+            console.log(err);
+        }else{
+            res.send(result);
+        }
+    })
+})
+
+//Resolve done tickets
+app.post('/api/resolve',(req,res)=>{
+    const sql = "delete from tickets where t_proj_id = ? and t_status = 'Done'";
+    db.query(sql,[req.body.Pid],(err,result)=>{
         if(err){
             console.log(err);
         }else{

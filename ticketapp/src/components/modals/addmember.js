@@ -1,7 +1,7 @@
 import {React,useState} from 'react';
 import {Modal,Button,Form} from 'react-bootstrap';
 import axios from 'axios';
-const AddMember = ({project_id,permission}) =>{
+const AddMember = (props) =>{
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -11,15 +11,14 @@ const AddMember = ({project_id,permission}) =>{
     const addmember = async () =>{
         axios.post('http://localhost:3001/api/addmember',{
             Uid: memId,
-            Pid: project_id
-        }).then(()=>{},()=>{alert('something went wrong please try again')});
-
-        window.location.reload();
+            Pid: props.project_id
+        }).then(()=>{});  
+        window.location.reload(); 
     }
 
     return(
         <>
-            {permission === 'Admin'&& <Button onClick={handleShow}>Add Member</Button>}
+            {props.permission === 'Admin'&& <Button onClick={handleShow}>Add Member</Button>}
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add Member</Modal.Title>
@@ -28,7 +27,7 @@ const AddMember = ({project_id,permission}) =>{
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Label>User Email</Form.Label>
-                            <Form.Control onChange={(e) =>{setMemId(e.target.value)}} maxlength="50"/>
+                            <Form.Control onChange={(e) =>{setMemId(e.target.value)}} maxLength="50"/>
                         </Form.Group>
                     </Form>
                 </Modal.Body>

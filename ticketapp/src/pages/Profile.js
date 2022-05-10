@@ -23,7 +23,7 @@ const Profile = () =>{
             email: email,
             phone: phone
         })
-        window.location.reload();
+        
     }
     
     return(
@@ -45,9 +45,9 @@ const Profile = () =>{
                                         <h4 className="text-right">Profile Settings</h4>
                                     </div>
                                     <div className="row mt-3">
-                                        <div className="col-md-12"><label className="labels">Full Name</label><input type="text" className="form-control" value={fullname} onChange={(e)=>{setfullname(e.target.value)}} maxlength="50"/></div>
-                                        <div className="col-md-12"><label className="labels">Email</label><input type="text" className="form-control" value={email}onChange={(e)=>{setemail(e.target.value)}} maxlength="50"/></div>
-                                        <div className="col-md-12"><label className="labels">Phone</label><input type="text" className="form-control" value={phone} onChange={(e)=>{setphone(e.target.value)}} maxlength="10"/></div>                                    
+                                        <div className="col-md-12"><label className="labels">Full Name</label><input type="text" className="form-control" value={fullname} onChange={(e)=>{setfullname(e.target.value)}} maxLength="50"/></div>
+                                        <div className="col-md-12"><label className="labels">Email</label><input type="text" className="form-control" value={email}onChange={(e)=>{setemail(e.target.value)}} maxLength="50"/></div>
+                                        <div className="col-md-12"><label className="labels">Phone</label><input type="text" className="form-control" value={phone} onChange={(e)=>{setphone(e.target.value)}} maxLength="10"/></div>                                    
                                     </div>                             
                                     <div className="mt-5 text-center">
                                         <button className="btn btn-primary profile-button m-2" type="button" onClick={updateuser}>Save Profile</button>

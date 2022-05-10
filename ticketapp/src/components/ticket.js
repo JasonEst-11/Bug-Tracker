@@ -6,8 +6,8 @@ import {BsThreeDots} from 'react-icons/bs'
 import { ItemTypes } from './ItemTypes';
 import axios from 'axios';
 
-const Ticket = ({data}) =>{
-    const tid = data.t_id;
+const Ticket = (props) =>{
+    const tid = props.data.t_id;
     const [{isDragging}, dragRef] = useDrag(
         () => ({
           type: ItemTypes.CARD,
@@ -18,7 +18,14 @@ const Ticket = ({data}) =>{
                 axios.post("http://localhost:3001/api/updatestatus",{
                     ticket_id: item.tid,
                     target: dropResult.name
-                }).then(()=>{window.location.reload()},()=>{})
+                }).then(()=>{props.setdata([...props.data,{
+                    t_title: props.data.t_title,
+                    type: geticon(props.data.t_type),
+                    t_desc: props.data.t_desc,
+                    handledby:props.data.handled_by,
+                    t_prio: props.data.t_prio,
+                    due_date: dateconvert(props.data.due_date)
+                }])},()=>{})
             }
           },
           collect: (monitor) =>({
@@ -29,11 +36,11 @@ const Ticket = ({data}) =>{
 
     //get icon
     const geticon = (type) =>{
-        if(data.t_type === 'Task'){
+        if(props.data.t_type === 'Task'){
             return(<FaTasks data-bs-toggle="tooltip" title="Task"/>);
-        }else if(data.t_type === 'Bug'){
+        }else if(props.data.t_type === 'Bug'){
             return(<FaBug data-bs-toggle="tooltip" title="Bug"/>);
-        }else if(data.t_type === 'Other'){
+        }else if(props.data.t_type === 'Other'){
             return(<BsThreeDots data-bs-toggle="tooltip" title="Other"/>);
         }else{
             return(<FaCogs data-bs-toggle="tooltip" title="Feature"/>);
@@ -66,19 +73,19 @@ const Ticket = ({data}) =>{
         <ToastContainer ref={dragRef} className="p-1" style={{border: isDragging? "5px solid blue": "0px",opacity}}>
             <Toast>
                 <Toast.Header closeButton={false}>
-                <strong className="me-auto">{data.t_title}</strong>
-                <small><h5>{geticon(data.t_type)}</h5></small>
+                <strong className="me-auto">{props.data.t_title}</strong>
+                <small><h5>{geticon(props.data.t_type)}</h5></small>
                 </Toast.Header>
                 <Toast.Body>
                     <div>
-                        <p>{data.t_desc}</p>
+                        <p>{props.data.t_desc}</p>
                     </div>
                     <div className='border-top border-secondary row'>
                         <div className='col'>
                             Handled_by: 
                         </div>                       
                         <div className='col'>
-                            {data.handled_by}
+                            {props.data.handled_by}
                         </div>                       
                     </div>
                     <div className='border-top border-secondary row'>
@@ -86,14 +93,14 @@ const Ticket = ({data}) =>{
                             Priority: 
                         </div> 
                         <div className='col'>
-                            {data.t_prio} 
+                            {props.data.t_prio} 
                         </div>                         
                     </div>
                     <div className='border-top border-secondary row'>
                         <div className='col'>
                             Deadline:
                         </div> 
-                        {dateconvert(data.due_date)}
+                        {dateconvert(props.data.due_date)}
                     </div>
                 </Toast.Body>
             </Toast>

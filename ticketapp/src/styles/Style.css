@@ -6,24 +6,22 @@
     height: 300px;
   }
   
-  .outline-login{
-    color: white;
+  .outline-login{ 
     border-radius: 25px;
     border: 2px solid #333;
     padding: 20px;
     width: 400px;
     height: 350px;
-    background-color: #464886;
+    background-color: #ffffff;
   }
   
   .outline-register{
-    color: white;
     border-radius: 25px;
     border: 2px solid #333;
     padding: 20px;
     width: 500px;
     height: 420px;
-    background-color: #464886;
+    background-color: #ffffff;
   }
   
   .panel{
@@ -128,7 +126,7 @@
   }
   
   .memberbacklog{
-    height: 55vh;
+    height: 45vh;
     position: relative;
   }
   
@@ -137,5 +135,49 @@
     overflow: auto;
   }
   .projectticket{
-    height: 50vh;
+    height: 40vh;
+  }
+
+  /* jkhk */
+  
+  .three-dots:after {
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    content: '\2807';
+    font-size: 20px;
+    padding: 0 5px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: rgb(0, 26, 255);
+    cursor: pointer;
+  }
+  
+  a div {
+    padding: 2px;
+  }
+  
+  .dropdown {
+    position: absolute;
+    right: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(95, 95, 95);
+    outline: none;
+    opacity: 0;
+    z-index: -1;
+    max-height: 0;
+    transition: opacity 0.1s, z-index 0.1s, max-height 5s;
+  }
+  
+  .dropdown-container:focus {
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .dropdown-container:focus .dropdown {
+    opacity: 1;
+    z-index: 100;
+    max-height: 100vh;
+    transition: opacity 0.2s, z-index 0.2s, max-height 0.2s;
   }
