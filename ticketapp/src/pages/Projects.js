@@ -12,8 +12,8 @@ const Projects  = () =>{
     
     //Load projects
     useEffect(()=>{
-        axios.get("http://localhost:3001/api/projects").then((response)=>{
-            setprojects(response.data);
+        axios.get("http://localhost:3001/api/projects").then(response=>{
+                setprojects(response.data);
         })
     },[]);
 

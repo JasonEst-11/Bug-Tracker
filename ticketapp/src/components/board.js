@@ -45,7 +45,7 @@ const Board = (props) =>{
                 <div className='row justify-content-center pt-3 m-1'>
                     {data.map((val)=>{
                         return(
-                            <Ticket data={val} key={val.t_id} setdata={setdata} t={data}/>
+                            <Ticket data={val} setdata={setdata} t={data} key={val.t_id}/>
                         )
                     })}
                 </div>

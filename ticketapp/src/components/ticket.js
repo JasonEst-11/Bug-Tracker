@@ -18,14 +18,16 @@ const Ticket = (props) =>{
                 axios.post("http://localhost:3001/api/updatestatus",{
                     ticket_id: item.tid,
                     target: dropResult.name
-                }).then(()=>{props.setdata([...props.data,{
+                }).then(()=>{
+                    props.setdata([...props.t,{
                     t_title: props.data.t_title,
                     type: geticon(props.data.t_type),
                     t_desc: props.data.t_desc,
                     handledby:props.data.handled_by,
                     t_prio: props.data.t_prio,
                     due_date: dateconvert(props.data.due_date)
-                }])},()=>{})
+                    }])}
+                ,()=>{})
             }
           },
           collect: (monitor) =>({
@@ -98,7 +100,7 @@ const Ticket = (props) =>{
                     </div>
                     <div className='border-top border-secondary row'>
                         <div className='col'>
-                            Deadline:
+                            Due:
                         </div> 
                         {dateconvert(props.data.due_date)}
                     </div>

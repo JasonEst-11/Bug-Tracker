@@ -12,12 +12,13 @@ const AddProject = (props) =>{
     const [p_desc, setp_desc] = useState('');
 
     //new project
-    const nproject = async () =>{
+    const nproject = async (props) =>{
         axios.post('http://localhost:3001/api/newproject',{
             Name: p_name,
             Desc: p_desc
         }).then((response)=>{
-            axios.post("http://localhost:3001/api/roletoproj",{insertid: response.data.insertId}).then(()=>{window.location.reload();})
+            axios.post("http://localhost:3001/api/roletoproj",{insertid: response.data.insertId}).then(()=>{window.location.reload();
+        })
         },
         ()=>{
             alert('something went wrong please try again')

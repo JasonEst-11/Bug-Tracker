@@ -16,7 +16,7 @@ const EditProject = (props) =>{
         setdesc(props.curdesc);
     },[props.curname,props.curdesc]);
     
-    const edit = async () =>{
+    const edit = () =>{
         axios.post('http://localhost:3001/api/editproject',{
             name: name,
             desc: desc,

@@ -22,8 +22,7 @@ const Profile = () =>{
             fullname: fullname,
             email: email,
             phone: phone
-        })
-        
+        }).then(()=>{alert("Saved changes")})
     }
     
     return(
@@ -46,7 +45,7 @@ const Profile = () =>{
                                     </div>
                                     <div className="row mt-3">
                                         <div className="col-md-12"><label className="labels">Full Name</label><input type="text" className="form-control" value={fullname} onChange={(e)=>{setfullname(e.target.value)}} maxLength="50"/></div>
-                                        <div className="col-md-12"><label className="labels">Email</label><input type="text" className="form-control" value={email}onChange={(e)=>{setemail(e.target.value)}} maxLength="50"/></div>
+                                        <div className="col-md-12"><label className="labels">Email</label><input type="text" className="form-control" value={email} disabled/></div>
                                         <div className="col-md-12"><label className="labels">Phone</label><input type="text" className="form-control" value={phone} onChange={(e)=>{setphone(e.target.value)}} maxLength="10"/></div>                                    
                                     </div>                             
                                     <div className="mt-5 text-center">

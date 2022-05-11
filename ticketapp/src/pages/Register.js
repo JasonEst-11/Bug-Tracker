@@ -40,28 +40,28 @@ const Register = () => {
                         <Form.Label>
                            Fullname:
                         </Form.Label>
-                        <Form.Control type="text" onChange={(e) => {setName(e.target.value)}} maxlength="50"/>
+                        <Form.Control type="text" onChange={(e) => {setName(e.target.value)}} maxLength="50"/>
                      </Form.Group>
                      {/* email */}
                      <Form.Group className="mb-3">
                         <Form.Label>
                            Email:
                         </Form.Label>                  
-                           <Form.Control type="email" onChange={(e) => {setEmail(e.target.value)}} maxlength="50"/>
+                           <Form.Control type="email" onChange={(e) => {setEmail(e.target.value)}} maxLength="50"/>
                      </Form.Group>
                      {/* password */}
                      <Form.Group  className="mb-3">
                         <Form.Label>
                            Password:
                         </Form.Label>                  
-                           <Form.Control type="password" onChange={(e) => {setPassword(e.target.value)}} maxlength="30"/>                 
+                           <Form.Control type="password" onChange={(e) => {setPassword(e.target.value)}} maxLength="30"/>                 
                      </Form.Group>
                      {/* phone */}
                      <Form.Group className="mb-3">
                         <Form.Label>
                            Phone:
                         </Form.Label>                  
-                           <Form.Control type="phone" onChange={(e) => {setPhone(e.target.value)}} maxlength="10"/>                  
+                           <Form.Control type="phone" onChange={(e) => {setPhone(e.target.value)}} maxLength="10"/>                  
                      </Form.Group>
                      {/* Buttons */}
                      <Form.Group  className="mb-3">

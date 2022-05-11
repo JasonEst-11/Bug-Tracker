@@ -135,7 +135,7 @@ const Tickets  = () =>{
                             <tbody>
                                 {tickets.map((val)=>{
                                     return(
-                                        <tr onClick={()=>{nav('/project/'+val.t_proj_id)}}>
+                                        <tr onClick={()=>{nav('/project/'+val.t_proj_id)}} key={val.t_id}>
                                             <td>{val.t_id}</td>
                                             <td>{val.t_title}</td>
                                             <td>{val.t_desc}</td>
