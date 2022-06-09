@@ -33,12 +33,7 @@ const Project = () =>{
         })
     },[]);
     
-    //Resolve tickets
-    const resolve =()=>{
-        axios.post("http://localhost:3001/api/resolve",{
-            Pid: projectid
-        }).then(()=>window.location.reload())
-    }
+    
     return ( 
         <div>
             <Sidebar/>
@@ -71,7 +66,7 @@ const Project = () =>{
                 </div>
                 <div className='m-2 p-2'>
                     <EditProject project_id={projectid} permission={role} curname={projname} curdesc={desc} setprojname={setprojname} setdesc={setdesc}/>
-                    {role === "Admin" && <Button variant='success' className='m-2 p-2' onClick={resolve}>Clear Done Tickets <BiCheckCircle  /></Button>}
+                    
                     <DeleteProject project_id={projectid} permission={role}/>
                 </div>    
             </div>

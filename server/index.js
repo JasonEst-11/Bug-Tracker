@@ -32,7 +32,7 @@ app.use(bodyparser.urlencoded({extended: true}));
 
 app.use(session({
     key: "userId",
-    secret: "this is the secret",
+    secret: "shhh",
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -72,6 +72,7 @@ app.get('/api/login',(req,res)=>{
         res.send({loggedIn: false});
     }
 })
+
 app.post('/api/login',(req,res)=>{
     const email = req.body.Email;
     const pass = req.body.Pass;
@@ -408,18 +409,6 @@ app.post('/api/updatestatus',(req,res)=>{
     const target = req.body.target;
     sql = "Update tickets set t_status = ?, handled_by = ? where t_id = ?";
     db.query(sql,[target,current_user,ticket_id],(err,result)=>{
-        if(err){
-            console.log(err);
-        }else{
-            res.send(result);
-        }
-    })
-})
-
-//Resolve done tickets
-app.post('/api/resolve',(req,res)=>{
-    const sql = "delete from tickets where t_proj_id = ? and t_status = 'Done'";
-    db.query(sql,[req.body.Pid],(err,result)=>{
         if(err){
             console.log(err);
         }else{
